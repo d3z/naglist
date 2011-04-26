@@ -1,0 +1,38 @@
+!!!5
+html
+  head
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js")
+    script(type="text/javascript")
+      function add() {
+        var nag_text = $('#newnagtext').val();
+        $.post('/', {text:nag_text}, function(data) {
+          $('#newtagtext').val('');
+        });
+      }
+    :sass
+      body
+        :font-family helvetica, arial, sans-serif
+      input
+        :font-size 14pt
+        :padding 5px
+        :margin-right 5px
+      button
+        :font-size 14pt
+        :padding 5px
+      #newnag
+        :margin-bottom 10px
+      #naglist
+        :border solid 1px #eeeeee
+        :background #dddddd
+        :width 640px
+    title Your naglist
+  body
+    h2 Here's your naglist
+    #newnag
+      input#newnagtext(size=40)
+      button(onclick="add()") Add nag
+    #naglist
+      ul
+        - nags.list().forEach(function(nag){
+        li nag.text
+        -})
